@@ -85,7 +85,9 @@ class Slots extends React.Component {
           <Reel
             patterns={this.state.patterns}
             key={this.state.patterns}
-            ref="reel"
+            ref={(c) => {
+              this.reel = c;
+            }}
             updateResult={this.updateResult}
           />
         </div>

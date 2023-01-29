@@ -26,12 +26,11 @@ export default function middleware(req: {
     return new Response(null, { status: 404 });
   }
   if (hostname === DOMAIN) {
-    // 本体サイトへ
+    // MainPage
     return NextResponse.rewrite(`${origin}${pathname}${search}`);
   }
 
-  console.log(`${origin}/_sub/${subdomain}${pathname}${search}`);
-  // サブドメインサイトへ
+  // Access to SubPage
   return NextResponse.rewrite(
     `${origin}/_sub/${subdomain}${pathname}${search}`,
   );

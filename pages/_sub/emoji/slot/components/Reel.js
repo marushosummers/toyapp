@@ -5,9 +5,9 @@ class Reel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pattern1: props.patterns[1],
-      pattern2: props.patterns[1],
-      pattern3: props.patterns[1],
+      pattern1: props.patterns ? props.patterns[1] : "",
+      pattern2: props.patterns ? props.patterns[1] : "",
+      pattern3: props.patterns ? props.patterns[1] : "",
       rolling1: false,
       rolling2: false,
       rolling3: false,
@@ -105,11 +105,12 @@ class Reel extends React.Component {
               }
               ref={this.slotRef[0]}
             >
-              {this.props.patterns.map((pattern, i) => (
-                <div key={i}>
-                  <span>{pattern}</span>
-                </div>
-              ))}
+              {this.props.patterns &&
+                this.props.patterns.map((pattern, i) => (
+                  <div key={i}>
+                    <span>{pattern}</span>
+                  </div>
+                ))}
             </div>
           </div>
         </div>
@@ -121,11 +122,12 @@ class Reel extends React.Component {
               }
               ref={this.slotRef[2]}
             >
-              {this.props.patterns.map((pattern, i) => (
-                <div key={i}>
-                  <span>{pattern}</span>
-                </div>
-              ))}
+              {this.props.patterns &&
+                this.props.patterns.map((pattern, i) => (
+                  <div key={i}>
+                    <span>{pattern}</span>
+                  </div>
+                ))}
             </div>
           </div>
         </div>
@@ -137,11 +139,12 @@ class Reel extends React.Component {
               }
               ref={this.slotRef[1]}
             >
-              {this.props.patterns.map((pattern, i) => (
-                <div key={i}>
-                  <span>{pattern}</span>
-                </div>
-              ))}
+              {this.props.patterns &&
+                this.props.patterns.map((pattern, i) => (
+                  <div key={i}>
+                    <span>{pattern}</span>
+                  </div>
+                ))}
             </div>
           </div>
         </div>
