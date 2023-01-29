@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export const config = {
   matcher: [
@@ -13,25 +13,19 @@ export const config = {
   ],
 };
 
-const DOMAIN = process.env.VERCEL === "1" ? process.env.HOST : "localhost:3000";
-export default function middleware(req: {
-  nextUrl: { pathname: any; search: string; origin: string };
-  headers: { get: (arg0: string) => string };
-}) {
-  const { pathname, origin, search } = req.nextUrl;
-  const hostname: string = req.headers.get("host");
-  const subdomain = hostname.replace(`.${DOMAIN}`, "");
+export default function middleware(req: NextRequest) {
+  const url = req.nextUrl;
 
-  if (pathname.startsWith(`/_sub`)) {
-    return new Response(null, { status: 404 });
-  }
-  if (hostname === DOMAIN) {
-    // MainPage
-    return NextResponse.rewrite(`${origin}${pathname}${search}`);
-  }
+  const hostname = req.headers.get("host") || "localhost:3000";
+  const path = url.pathname;
 
-  // Access to SubPage
-  return NextResponse.rewrite(
-    `${origin}/_sub/${subdomain}${pathname}${search}`,
-  );
+  const sub =
+    process.env.NODE_ENV === "production" && process.env.VERCEL === "1"
+      ? hostname.replace(`.toyapp.vercel.app`, "").replace(`.toyapp.dev`, "")
+      : hostname.replace(`.localhost:3000`, "");
+
+  if (sub === "emoji") {
+    return NextResponse.rewrite(new URL(`/_sub/${sub}${path}`, req.url));
+  }
+  return NextResponse.rewrite(req.url);
 }
