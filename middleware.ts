@@ -18,6 +18,7 @@ export default function middleware(req: NextRequest) {
 
   const hostname = req.headers.get("host") || "localhost:3000";
   const path = url.pathname;
+  const query = url.search;
 
   const sub =
     process.env.NODE_ENV === "production" && process.env.VERCEL === "1"
@@ -25,7 +26,9 @@ export default function middleware(req: NextRequest) {
       : hostname.replace(`.localhost:3000`, "");
 
   if (sub === "emoji") {
-    return NextResponse.rewrite(new URL(`/_sub/${sub}${path}`, req.url));
+    return NextResponse.rewrite(
+      new URL(`/_sub/${sub}${path}${query}`, req.url),
+    );
   }
   return NextResponse.rewrite(req.url);
 }
