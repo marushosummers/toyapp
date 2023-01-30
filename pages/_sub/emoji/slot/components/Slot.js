@@ -48,8 +48,8 @@ class Slots extends React.Component {
 
     url.searchParams.append(
       "q",
-      `${state.result1 ?? "🎰"} ${state.result2 ?? "🎰"} ${
-        state.result3 ?? "🎰"
+      `${state.result1 ?? "🎰"} ${state.result3 ?? "🎰"} ${
+        state.result2 ?? "🎰"
       }`,
     );
     return url;
