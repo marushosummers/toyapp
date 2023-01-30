@@ -41,14 +41,17 @@ class Slots extends React.Component {
 
   getURL = (state) => {
     if (!state.result1) {
-      return new URL("https://emoji-slot.marusho.io");
+      return new URL("https://emoji.toyapp.dev/slot");
     }
 
-    const url = new URL("https://emoji-slot.marusho.io");
+    const url = new URL("https://emoji.toyapp.dev/slot");
 
-    url.searchParams.append("p1", state.result1 ?? "🎰");
-    url.searchParams.append("p2", state.result2 ?? "🎰");
-    url.searchParams.append("p3", state.result3 ?? "🎰");
+    url.searchParams.append(
+      "q",
+      `${state.result1 ?? "🎰"} ${state.result2 ?? "🎰"} ${
+        state.result3 ?? "🎰"
+      }`,
+    );
     return url;
   };
 

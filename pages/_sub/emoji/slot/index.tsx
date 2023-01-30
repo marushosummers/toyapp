@@ -3,7 +3,7 @@ import styles from "./styles/Home.module.css";
 import Slot from "./components/Slot";
 
 export async function getServerSideProps(context: { query: { q: string } }) {
-  return { props: { query: context.query.q || "🎰 🎰 🎰" } };
+  return { props: { query: context?.query?.q ?? "🎰 🎰 🎰" } };
 }
 
 export default function EmojiSlot(props: { query: { q: string } }) {
