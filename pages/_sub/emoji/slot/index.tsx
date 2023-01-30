@@ -6,7 +6,7 @@ export async function getServerSideProps(context: { query: { q: string } }) {
   return { props: { query: context?.query?.q ?? "🎰 🎰 🎰" } };
 }
 
-export default function EmojiSlot(props: { query: { q: string } }) {
+export default function EmojiSlot(props: { query: string }) {
   return (
     <div className={styles.mainContainer}>
       <Head>
@@ -32,14 +32,18 @@ export default function EmojiSlot(props: { query: { q: string } }) {
         <meta name="og:description" content="Emoji Slot" />
         <meta
           property="og:image"
-          content={`https://toyapp.dev/api/emoji/slot/og?q=${props.query.q}`}
+          content={`https://toyapp.dev/api/emoji/slot/og?q=${
+            props.query ?? ""
+          }`}
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Emoji Slot" />
         <meta name="twitter:description" content="Emoji Slot" />
         <meta
           property="twitter:image"
-          content={`https://toyapp.dev/api/emoji/slot/og?q=${props.query.q}`}
+          content={`https://toyapp.dev/api/emoji/slot/og?q=${
+            props.query ?? ""
+          }`}
         />
       </Head>
       <div className={styles.main}>
