@@ -5,7 +5,7 @@ import styles from "../styles/Home.module.css";
 import { TwitterShareButton, TwitterIcon } from "react-share";
 class Slots extends React.Component {
   componentDidMount() {
-    history.pushState("", "", "/");
+    history.pushState("", "", "/slot");
   }
 
   static patterns = {
