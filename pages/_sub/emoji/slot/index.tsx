@@ -2,11 +2,11 @@ import Head from "next/head";
 import styles from "./styles/Home.module.css";
 import Slot from "./components/Slot";
 
-// export async function getServerSideProps({ query }) {
-//   return { props: { query } };
-// }
+export async function getServerSideProps(context: { query: { q: string } }) {
+  return { props: { query: context.query.q } };
+}
 
-export default function EmojiSlot() {
+export default function EmojiSlot(props: { query: { q: string } }) {
   return (
     <div className={styles.mainContainer}>
       <Head>
@@ -30,21 +30,17 @@ export default function EmojiSlot() {
         <meta property="og:site_name" content="Emoji Slot" />
         <meta name="og:title" content="Emoji Slot" />
         <meta name="og:description" content="Emoji Slot" />
-        {/* <meta
+        <meta
           property="og:image"
-          content={`https://emoji-slot.marusho.io/api/ogp?p1=${
-            props.query.p1 ?? "🎰"
-          }&p2=${props.query.p2 ?? "🎰"}&p3=${props.query.p3 ?? "🎰"}`}
+          content={`https://toyapp.dev/api/emoji/slot/og?q=${props.query.q}`}
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Emoji Slot" />
         <meta name="twitter:description" content="Emoji Slot" />
         <meta
           property="twitter:image"
-          content={`https://emoji-slot.marusho.io/api/ogp?p1=${
-            props.query.p1 ?? "🎰"
-          }&p2=${props.query.p2 ?? "🎰"}&p3=${props.query.p3 ?? "🎰"}`}
-        /> */}
+          content={`https://toyapp.dev/api/emoji/slot/og?q=${props.query.q}`}
+        />
       </Head>
       <div className={styles.main}>
         <Slot />
